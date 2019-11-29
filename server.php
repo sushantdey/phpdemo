@@ -55,4 +55,27 @@ if (count($errors)==0) {
     $_SESSION['success']="You have registered successfully";
     header('location: index.php');
 }
+
+
+//login
+if(isset($_POST['login'])){
+    $username = mysqli_real_escape_string($db, $_POST['username']);
+    $password = mysqli_real_escape_string($db, $_POST['password']);
+    if(empty($username) || empty($password)){
+        array_push($errors,"Username/password cannot be blank");
+    }
+    if(count($errors)==0){
+        $password = md5($password);
+        $query = "SELECT * FROM user WHERE username='$username' AND password = '$password';";
+        $results = mysqli_query($db, $query);
+        if (mysqli_num_rows($results)) {
+            $_SESSION['username'] = $username;
+            $_SESSION['success'] = "Logged in successfully";
+            header("location: index.php");
+        }
+        else {
+            array_push($errors,"username or password incorrect");
+        }
+    }
+}
 ?>
