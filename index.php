@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['username'])) {
     $_SESSION['message']="You are not logged in. Login to continue.";
-    header("location:login.php");
+    header("location : login.php");
 }
 if (isset($_GET['logout'])) {
     header("location : login.php");
@@ -25,7 +25,7 @@ if (isset($_GET['logout'])) {
 		echo $_SESSION['success'];
 		unset($_SESSION['success']);
 		?>
-		<a href="index.php?logout='1'"></a>
+		<a href="index.php?logout='1'">logout</a>
 		<?php endif;?>
 	</body>
 </html>
